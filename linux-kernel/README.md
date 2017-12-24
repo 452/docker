@@ -27,6 +27,15 @@ qemu-system-x86_64 -bootp tftp://192.168.99.1//pxelinux.0 -tftp /data/pxe
 
 
 /data/git/docker/linux-kernel/fs/fs.sh; qemu-system-x86_64 -kernel /tmp/docker/bzImage -append "root=/dev/sda rw rootfstype=ext4 noinitrd debug console=ttyS0 init=/bin/busybox sh /etc/inittab" -drive format=raw,file=/git/docker/linux-kernel/fs/rootfs.ext4 -m 512M -serial stdio
+
+qemu-system-arm -serial stdio -kernel /data/git/buildroot/output/images/zImage -dtb /data/git/buildroot/output/images/versatile-pb.dtb -append 'console=tty0 console=ttyAMA0' -M versatilepb
+
+qemu-system-arm -serial stdio -kernel /data/git/mkbootimg_tools/boo/kernel -append 'console=tty0 console=ttyAMA0 console=ttyS0 console=ttyS1 console=ttyFIQ0 noinitrd debug console=ttyMT3,921600n1 vmalloc=496M slub_max_order=0 lcm=1-hx8394a_hd720_dsi_vdo_tianma fps=6219 bootprof.pl_t=371 bootprof.lk_t=1379 printk.disable_uart=0 boot_reason=0' -M versatilepb
+
+console=ttyMT3,921600n1 vmalloc=496M slub_max_order=0 lcm=1-hx8394a_hd720_dsi_vdo_tianma fps=6219 bootprof.pl_t=371 bootprof.lk_t=1379 printk.disable_uart=1 boot_reason=0
+
+emulator -kernel /data/phones/MT6582-KK-KERNEL/out/target/product/bird82_tb_td_a_kk/obj/KERNEL_OBJ/arch/arm/boot/zImage -avd myAVD
+
 ```
 
 Custom init program
